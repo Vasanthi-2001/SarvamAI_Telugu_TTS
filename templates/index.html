@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sarvam Telugu TTS</title>
+    <style>
+        /* Body & layout */
+        body {
+            background-color: #001330; /* Navy Blue */
+            font-family: Calibri, sans-serif;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+            margin: 0;
+            padding: 30px;
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        form {
+            width: 90%;
+            max-width: 600px; /* increased width */
+            display: flex;
+            flex-direction: column;
+            gap: 20px; /* increased gap */
+            background-color: #0b4f94; /* slightly lighter navy */
+            padding: 25px; /* increased padding */
+            border-radius: 20px; /* more rounded corners */
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.4);
+        }
+
+        label {
+            font-size: 1.1rem;
+            margin-bottom: 5px;
+        }
+
+        select, textarea {
+            font-size: 1.1rem;
+            padding: 15px; /* increased padding */
+            border-radius: 15px; /* more rounded */
+            border: none;
+            outline: none;
+            width: 100%;
+        }
+
+        textarea {
+            resize: none;
+            min-height: 200px; /* increased height */
+        }
+
+        button {
+            background-color: #8000ff; /* Purple */
+            color: white;
+            font-size: 1.2rem;
+            font-weight: bold;
+            padding: 12px;
+            border-radius: 15px;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #9933ff;
+        }
+
+        .audio-container {
+            margin-top: 30px;
+            text-align: center;
+            width: 90%;
+            max-width: 600px;
+        }
+
+        audio {
+            margin-top: 15px;
+            width: 100%;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sarvam Telugu TTS</h1>
+    <form method="POST">
+        <label for="voice">Select Voice:</label>
+        <select name="voice" id="voice">
+            {% for v in voices %}
+            <option value="{{ v }}" {% if v == speaker_selected %}selected{% endif %}>{{ v }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="text">Enter Telugu Text:</label>
+        <textarea name="text" id="text">{{ text_input }}</textarea>
+
+        <button type="submit">Generate Speech</button>
+    </form>
+
+    {% if audio_data %}
+    <div class="audio-container">
+        <h2>Generated Audio:</h2>
+        <audio controls>
+            <source src="data:audio/wav;base64,{{ audio_data }}" type="audio/wav">
+            Your browser does not support the audio element.
+        </audio>
+        <br><br>
+        <!-- Download button with voice name -->
+        <a href="data:audio/wav;base64,{{ audio_data }}" download="{{ speaker_selected }}.wav">
+            <button type="button">Download Audio</button>
+        </a>
+    </div>
+    {% endif %}
+</body>
+</html>
