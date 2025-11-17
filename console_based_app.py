@@ -1,3 +1,6 @@
+# It is a console based application 
+
+
 import requests
 import base64
 API_KEY = "YOUR_API_KEY_HERE"   # <-- Put your key here
