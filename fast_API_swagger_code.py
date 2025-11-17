@@ -1,3 +1,7 @@
+# I have developed sarvam fast API with the swagger 
+#added parameters in POST method
+
+
 from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.responses import HTMLResponse,StreamingResponse
