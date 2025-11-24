@@ -1,4 +1,6 @@
 # It is a console based application 
+#It generates output in the vscode terminal
+
 
 
 import requests
